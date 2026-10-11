@@ -2,76 +2,148 @@
 <html lang="el">
 <head>
   <meta charset="UTF-8">
-  <title>Αντίστροφη Μέτρηση</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Πτήση για Θεσσαλονίκη</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #2c3e50, #3498db);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      /* Ρομαντικό gradient που θυμίζει νυχτερινό ουρανό και σούρουπο */
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #e94560 100%);
       color: #fff;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
       overflow: hidden;
-    }
-
-    .countdown {
       text-align: center;
-      position: relative;
-      z-index: 2;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-
-    .time {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      font-size: 2rem;
-    }
-
-    .box {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 15px 20px;
-      border-radius: 10px;
-      min-width: 90px;
-    }
-
-    .label {
-      font-size: 0.9rem;
-      margin-top: 5px;
-      display: block;
-      opacity: 0.8;
-    }
-
-    /* ✈️ Animation airplane */
-    .airplane {
+    /* ✈️ Τοπίο ουρανού και Πόλεις */
+    .sky-container {
       position: absolute;
       top: 15%;
-      left: -200px;
-      font-size: 3rem;
+      width: 100%;
+      height: 100px;
+    }
+
+    .cities {
+      display: flex;
+      justify-content: space-between;
+      width: 85%;
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.9);
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    }
+
+    /* Το αεροπλάνο πετάει από αριστερά προς τα δεξιά */
+    .airplane {
+      position: absolute;
+      top: 30px;
+      left: -150px;
+      font-size: 2.5rem;
       animation: fly 12s linear infinite;
     }
 
     @keyframes fly {
       0% { transform: translateX(0) rotate(10deg); }
-      50% { transform: translateX(110vw) rotate(5deg); }
-      100% { transform: translateX(0) rotate(10deg); }
+      100% { transform: translateX(calc(100vw + 200px)) rotate(10deg); }
+    }
+
+    /* Κουτί αντίστροφης μέτρησης */
+    .countdown-container {
+      position: relative;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      margin-top: 60px;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 5px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      font-style: italic;
+      color: #fca311;
+    }
+
+    .time {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+
+    .box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+      min-width: 80px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .label {
+      font-size: 1rem;
+      margin-top: 8px;
+      display: block;
+      font-weight: normal;
+      opacity: 0.9;
+    }
+
+    /* Εφέ παλμού για την καρδιά */
+    .heart {
+      color: #ff4d6d;
+      display: inline-block;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    /* Προσαρμογή για μικρές οθόνες (Κινητά) */
+    @media (max-width: 600px) {
+      .time { font-size: 1.8rem; }
+      .box { min-width: 60px; padding: 15px; }
+      h1 { font-size: 1.5rem; }
+      .cities { font-size: 1rem; width: 95%; }
     }
   </style>
 </head>
 <body>
-  <!-- Αεροπλάνο -->
-  <div class="airplane">✈️</div>
 
-  <!-- Αντίστροφη Μέτρηση -->
-  <div class="countdown">
-    <h1>Αντίστροφη μέτρηση μέχρι την 13 Νοεμβρίου 2026</h1>
-    <div class="time">
+  <!-- Ουρανός και Διαδρομή -->
+  <div class="sky-container">
+    <div class="cities">
+      <span>📍 Βρυξέλλες</span>
+      <span>Θεσσαλονίκη 📍</span>
+    </div>
+    <!-- Το αεροπλάνο στέλνει πολλή αγάπη! -->
+    <div class="airplane">✈️<span class="heart">❤️</span></div>
+  </div>
+
+  <!-- Κεντρικό πλαίσιο -->
+  <div class="countdown-container">
+    <h1 id="main-title">Αντίστροφη μέτρηση για την αγκαλιά σου</h1>
+    <div class="subtitle" id="subtitle">13 Νοεμβρίου 2026 • Η πτήση της επιστροφής</div>
+    
+    <div class="time" id="countdown">
       <div class="box">
         <span id="days">0</span>
         <span class="label">Μέρες</span>
@@ -92,14 +164,17 @@
   </div>
 
   <script>
-    const targetDate = new Date("November 13, 2026 00:00:00").getTime();
+    // Σωστή μορφή ημερομηνίας (ISO) για να μην χαλάει στα κινητά!
+    const targetDate = new Date("2026-11-13T00:00:00").getTime();
 
     function updateCountdown() {
       const now = new Date().getTime();
       const distance = targetDate - now;
 
       if (distance <= 0) {
-        document.querySelector(".countdown").innerHTML = "<h1>Έφτασε η μέρα!</h1>";
+        document.getElementById("main-title").innerHTML = "Επιτέλους μαζί! <span class='heart'>❤️</span>";
+        document.getElementById("subtitle").innerHTML = "Η πτήση μόλις προσγειώθηκε στη Θεσσαλονίκη!";
+        document.getElementById("countdown").style.display = "none";
         clearInterval(interval);
         return;
       }
@@ -120,3 +195,4 @@
   </script>
 </body>
 </html>
+
